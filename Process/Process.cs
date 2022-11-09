@@ -1,5 +1,4 @@
 ﻿using OpenCvSharp;
-using FFMpegCore;
 using System;
 using ICSharpCode.SharpZipLib.Zip;
 using ASCII_Art.ViewModel;
@@ -47,7 +46,17 @@ namespace ASCII_Art.Process
         {
             //string output = FileName.Substring(0, FileName.LastIndexOf('.') + 1);
             DataContext.InfoText = "Start processing ...\nNow is processing the audio...";
-            FFMpeg.ExtractAudio(FileName, ".cache\\2.mp3");
+            //FFMpeg.ExtractAudio(FileName, ".cache\\2.mp3");
+            if(File.Exists(".cache\\2.mp3"))File.Delete(".cache\\2.mp3");
+            System.Diagnostics.Process p=new System.Diagnostics.Process();
+            p.StartInfo.FileName = "libs\\ffmpeg.exe";
+            p.StartInfo.Arguments = "-i " + FileName + " -f mp3 .cache\\2.mp3";
+            p.StartInfo.RedirectStandardInput = false;
+            p.StartInfo.RedirectStandardOutput = false;
+            p.StartInfo.RedirectStandardError = false;
+            p.StartInfo.CreateNoWindow = false;
+            p.Start();
+            p.WaitForExit();
             int w = Resolution.Width;
             int h = Resolution.Height;
             Mat mat = new Mat();
