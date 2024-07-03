@@ -1,0 +1,8 @@
+packages
+obj
+bin
+.idea
+.vs
+*.exe
+template.txt
+libs
