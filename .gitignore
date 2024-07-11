@@ -6,3 +6,7 @@ bin
 *.exe
 template.txt
 libs
+.cache
+build
+dist
+__pycache__
